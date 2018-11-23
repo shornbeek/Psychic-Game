@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+    <h1>Psychic-Game</h1>
+    
+    <div>
+        <p id="directions-text">Guess a letter to start playing!</p>
+        
+        <p id="userchoice-text"></p>
+        <p id="computerchoice-text"></p>
+
+        <p id="wins-text"></p>
+        <p id="losses-text"></p>
+        <p id="guesses-text"></p>
+      </div>
+
+
+<script type=text/javascript>
+
+    //array of all the letter choices 
+
+var computerChoices = ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "a", "s", "d", "f", "g", "h", "j", "k", "l", "z", "x", "c", "v", "b", "n", "m"];
+
+    // win loss guess varables 
+var wins = 0;
+var losses = 0;
+var guesses = 0;
+    // elements in the html document 
+ var directionsText = document.getElementById("directions-text");
+ var userChoiceText = document.getElementById("userchoice-text");
+ var computerChoiceText = document.getElementById("computerchoice-text");
+ var winsText = document.getElementById("wins-text");
+ var lossesText = document.getElementById("losses-text");
+ var guessesText = document.getElementById("ties-text");
+
+// This function is run whenever the user presses a key.
+    document.onkeyup = function(event) {
+
+// Determines which key was pressed.
+var userGuess = event.key;
+console.log(userGuess);
+
+// Randomly chooses a choice from the options array. This is the Computer's guess.
+var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+console.log(computerChoices);
+// Reworked our code from last step to use "else if" instead of lots of if statements.
+
+// This logic determines the outcome of the game (win/loss/tie), and increments the appropriate number
+if ((userGuess === "r") || (userGuess === "p") || (userGuess === "s")) {
+
+  if ((userGuess === "r" && computerGuess === "s") ||
+    (userGuess === "s" && computerGuess === "p") || 
+    (userGuess === "p" && computerGuess === "r")) {
+    wins++;
+  } else if (userGuess === computerGuess) {
+    ties++;
+  } else {
+    losses++;
+  }
+
+  // Hide the directions
+  directionsText.textContent = "";
+
+  // Display the user and computer guesses, and wins/losses/ties.
+  userChoiceText.textContent = "You chose: " + userGuess;
+  computerChoiceText.textContent = "The computer chose: " + computerGuess;
+  winsText.textContent = "wins: " + wins;
+  lossesText.textContent = "losses: " + losses;
+  tiesText.textContent = "ties: " + ties;
+}
+};
+
+</script>
+
+</body>
+</html>
