@@ -53,20 +53,18 @@ console.log(computerChoices);
 // Reworked our code from last step to use "else if" instead of lots of if statements.
 
 // This logic determines the outcome of the game (win/loss/tie), and increments the appropriate number
-if ((userGuess === "r") || (userGuess === "p") || (userGuess === "s")) {
+if ((userGuess === computerGuess)) {
 
-  if ((userGuess === "r" && computerGuess === "s") ||
-    (userGuess === "s" && computerGuess === "p") || 
-    (userGuess === "p" && computerGuess === "r")) {
+  if ((userGuess === computerGuess)) {
     wins++;
-  } else if (userGuess === computerGuess) {
+  } else if (userGuess !== computerGuess) {
     ties++;
   } else {
     losses++;
   }
 
   // Hide the directions
-  directionsText.textContent = "";
+//   directionsText.textContent = "";
 
   // Display the user and computer guesses, and wins/losses/ties.
   userChoiceText.textContent = "You chose: " + userGuess;
