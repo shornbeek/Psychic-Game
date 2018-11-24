@@ -39,11 +39,9 @@ var guesses = 0;
  var winsText = document.getElementById("wins-text");
  var lossesText = document.getElementById("losses-text");
  var guessesText = document.getElementById("guesses-text");
+ var total = 8;
 
  
-
- 
-
 // This function is run whenever the user presses a key.
     document.onkeyup = function(event) {
 
@@ -58,15 +56,25 @@ console.log(computerChoices);
 
 // This logic determines the outcome of the game (win/loss/tie), and increments the appropriate number
 if (computerGuess === userGuess) {
-    console.log("you win")
+    console.log("you win");
+    // document.write("you win");
     wins++
     }
 
-     else if (computerGuess !== userGuess > 8) {
-        console.log("you lose")
+     if (computerGuess !== userGuess) {
+        console.log("guess counter");
         guesses++
+}
 
+    if (userGuess !== total) {
+        console.log("guess counter");
+        losses++
+}
 
+else {
+    (userGuess > total && computerGuess !== userGuess ) 
+    console.log("you lose");
+    losses++
 }
 
   // Hide the directions
@@ -77,13 +85,33 @@ if (computerGuess === userGuess) {
   computerChoiceText.textContent = "The computer chose: " + computerGuess;
   winsText.textContent = "wins: " + wins;
   lossesText.textContent = "losses: " + losses;
-  guessesText.textContent = "guesses: " + guesses;
+  guessesText.textContent = "guesses: " + guesses + event.key;
 };
 
 </script>
 
 </body>
 </html>
+
+
+
+<!-- Attemt 7 
+    if (computerGuess === userGuess) {
+    console.log("you win");
+    document.write("you win");
+    wins++
+    }
+
+     else if (computerGuess !== userGuess ||  (userGuess > total)) {
+        console.log("guess counter");
+        guesses++
+}
+
+else if (userGuess > total) {
+    
+    console.log("you lose");
+    losses++
+} -->
 
 
 
