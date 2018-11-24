@@ -27,7 +27,7 @@
     //array of all the letter choices 
 
 var computerChoices = ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "a", "s", "d", "f", "g", "h", "j", "k", "l", "z", "x", "c", "v", "b", "n", "m"];
-
+var que = []
     // win loss guess varables 
 var wins = 0;
 var losses = 0;
@@ -38,7 +38,11 @@ var guesses = 0;
  var computerChoiceText = document.getElementById("computerchoice-text");
  var winsText = document.getElementById("wins-text");
  var lossesText = document.getElementById("losses-text");
- var guessesText = document.getElementById("ties-text");
+ var guessesText = document.getElementById("guesses-text");
+
+ 
+
+ 
 
 // This function is run whenever the user presses a key.
     document.onkeyup = function(event) {
@@ -53,29 +57,120 @@ console.log(computerChoices);
 // Reworked our code from last step to use "else if" instead of lots of if statements.
 
 // This logic determines the outcome of the game (win/loss/tie), and increments the appropriate number
-if ((userGuess === computerGuess)) {
+if (computerGuess === userGuess) {
+    console.log("you win")
+    wins++
+    }
 
-  if ((userGuess === computerGuess)) {
-    wins++;
-  } else if (userGuess !== computerGuess) {
-    ties++;
-  } else {
-    losses++;
-  }
+     else if (computerGuess !== userGuess > 8) {
+        console.log("you lose")
+        guesses++
+
+
+}
 
   // Hide the directions
-//   directionsText.textContent = "";
+  directionsText.textContent = "";
 
   // Display the user and computer guesses, and wins/losses/ties.
   userChoiceText.textContent = "You chose: " + userGuess;
   computerChoiceText.textContent = "The computer chose: " + computerGuess;
   winsText.textContent = "wins: " + wins;
   lossesText.textContent = "losses: " + losses;
-  guessesText.textContent = "Your guesses " + guesses;
-}
+  guessesText.textContent = "guesses: " + guesses;
 };
 
 </script>
 
 </body>
 </html>
+
+
+
+<!-- Attempt 6 
+    
+    if ((userGuess !== computerGuess)) {
+    console.log("you are wrong " + userGuess);
+
+if (userGuess < 8) {
+  losses++;
+  console.log("you have guessed " + losses + " times");
+} 
+
+if ((userGuess !== computerGuess)) {
+  guesses++;
+  console.log("you have guessed " + guesses + " times");
+} 
+
+// if ((userGuess < 8)) {
+//   guesses++;
+//   console.log("you have guessed " + guesses + " times");
+// } 
+
+else if ((userGuess === computerGuess)) {
+  win++;
+  console.log("you have guessed " + win );
+} else {
+  win++;
+}  -->
+
+
+<!-- Attempt 4
+    if ((userGuess === computerGuess)) {
+
+    if ((userGuess === "q" && computerGuess === "q") || (userGuess === "w" && computerGuess === "w") || (userGuess === "e" && computerGuess === "e"),(userGuess === "r" && computerGuess === "r") || (userGuess === "t" && computerGuess === "t") || (userGuess === "y" && computerGuess === "y"),(userGuess === "u" && computerGuess === "u") || (userGuess === "i" && computerGuess === "i") || (userGuess === "o" && computerGuess === "o"),(userGuess === "p" && computerGuess === "p") || (userGuess === "a" && computerGuess === "a") || (userGuess === "s" && computerGuess === "s"),
+   (userGuess === "d" && computerGuess === "d") || (userGuess === "f" && computerGuess === "f") || (userGuess === "g" && computerGuess === "g"),(userGuess === "h" && computerGuess === "h") || (userGuess === "j" && computerGuess === "j") || (userGuess === "k" && computerGuess === "k"),(userGuess === "l" && computerGuess === "l") || (userGuess === "z" && computerGuess === "z") || (userGuess === "x" && computerGuess === "x"),
+   (userGuess === "c" && computerGuess === "c") || (userGuess === "v" && computerGuess === "v") || (userGuess === "b" && computerGuess === "b"),(userGuess === "n" && computerGuess === "n") || (userGuess === "m" && computerGuess === "m")) {
+             wins++;
+   }  else if (userGuess !== computerGuess) {
+     guesses++;
+   } else {
+     losses++;
+   } -->
+
+
+
+<!-- Attempt 3
+    if ((userGuess === "q") || (userGuess === "w") || (userGuess === "e"),(userGuess === "r") || (userGuess === "t") || (userGuess === "y"),(userGuess === "u") || (userGuess === "i") || (userGuess === "o"),(userGuess === "p") || (userGuess === "a") || (userGuess === "s"),
+(userGuess === "d") || (userGuess === "f") || (userGuess === "g"),(userGuess === "h") || (userGuess === "j") || (userGuess === "k"),(userGuess === "l") || (userGuess === "z") || (userGuess === "x"),
+(userGuess === "c") || (userGuess === "v") || (userGuess === "b"),(userGuess === "n") || (userGuess === "m")) {
+
+ if ((userGuess === "q" && computerGuess === "q") || (userGuess === "w" && computerGuess === "w") || (userGuess === "e" && computerGuess === "e"),(userGuess === "r" && computerGuess === "r") || (userGuess === "t" && computerGuess === "t") || (userGuess === "y" && computerGuess === "y"),(userGuess === "u" && computerGuess === "u") || (userGuess === "i" && computerGuess === "i") || (userGuess === "o" && computerGuess === "o"),(userGuess === "p" && computerGuess === "p") || (userGuess === "a" && computerGuess === "a") || (userGuess === "s" && computerGuess === "s"),
+(userGuess === "d" && computerGuess === "d") || (userGuess === "f" && computerGuess === "f") || (userGuess === "g" && computerGuess === "g"),(userGuess === "h" && computerGuess === "h") || (userGuess === "j" && computerGuess === "j") || (userGuess === "k" && computerGuess === "k"),(userGuess === "l" && computerGuess === "l") || (userGuess === "z" && computerGuess === "z") || (userGuess === "x" && computerGuess === "x"),
+(userGuess === "c" && computerGuess === "c") || (userGuess === "v" && computerGuess === "v") || (userGuess === "b" && computerGuess === "b"),(userGuess === "n" && computerGuess === "n") || (userGuess === "m" && computerGuess === "m")) {
+          wins++;
+}  else if (userGuess !== computerGuess) {
+  guesses++;
+} else {
+  losses++;
+} -->
+
+
+
+
+
+<!--  Attempt 2 logic 
+    if ((userGuess !== computerGuess)) {
+
+    if ((userGuess !== computerGuess)) {
+      guesses++;
+    } else if (guesses <  8) {
+      losses++;
+    } else {
+      win++;
+    } -->
+
+
+
+
+<!--   Attempt 1 Logic 
+if ((userGuess === computerGuess)) {
+
+    if ((userGuess === computerGuess)) {
+      wins++;
+    } else if (userGuess !== computerGuess) {
+      guesses++;
+    } else {
+      losses++;
+    } -->
+  
