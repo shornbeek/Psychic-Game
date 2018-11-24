@@ -21,8 +21,43 @@
         <p id="guesses-text"></p>
       </div>
 
-      <input type="search" />
-
+     
+      <!-- <html>
+            <head>
+            <title> JS guessing game </title>
+            
+            
+            <script type="text/javascript">
+                var ranNum;
+            
+                function playGame() {
+            
+                    var answer;
+                    var found = false;
+                    var count = 10;
+            
+                    while ((count > 0) && (found == false)) {
+                        answer = prompt("Guess a number between 1 and 50!");
+                        if (answer > ranNum) { alert("Guess lower!"); }
+                        if (answer < ranNum) { alert("Guess higher!!"); }
+                        if (answer == ranNum) { alert("Correct!"); found = true; }
+                        count--;
+                    }
+                    if (!found) { alert('Too bad, you lose ... The number was ' + ranNum); }
+                    return found;
+                }
+                function generateRandomNumber() {
+                    ranNum = Math.floor(Math.random() * 50) + 1;
+                }
+                window.onload = function () { generateRandomNumber(); }
+            </script>
+            </head>
+            <body>
+            <strong> Guess a random number </strong>
+                 <input type="button" value="Play game" onclick="playGame()">
+                 <input type="button" value="New game" onclick="generateRandomNumber()">
+            </body>
+            </html> -->
 
 
 <script type=text/javascript>
@@ -42,7 +77,6 @@ var guesses = 0;
  var winsText = document.getElementById("wins-text");
  var lossesText = document.getElementById("losses-text");
  var guessesText = document.getElementById("guesses-text");
- var total = 8;
 
  
 // This function is run whenever the user presses a key.
@@ -55,10 +89,42 @@ console.log(userGuess);
 // Randomly chooses a choice from the options array. This is the Computer's guess.
 var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
 console.log(computerChoices);
-// Reworked our code from last step to use "else if" instead of lots of if statements.
 
-// This logic determines the outcome of the game (win/loss/tie), and increments the appropriate number
-if (computerGuess === userGuess) {
+// This logic determines the outcome of the game
+if (userGuess === computerGuess)  { 
+    console.log("you win");    
+    wins++;               
+} 
+else if (guesses >= 8) { 
+    console.log("you lose");                                
+    losses++;   
+         
+}
+
+else {
+    guesses++
+    console.log("not yet keep trying");
+}
+
+  // Hide the directions
+  directionsText.textContent = "";
+
+  // Display the user and computer guesses, and wins/losses/ties.
+  userChoiceText.textContent = "You chose: " + userGuess;
+  computerChoiceText.textContent = "The computer chose: " + computerGuess;
+  winsText.textContent = "wins: " + wins;
+  lossesText.textContent = "losses: " + losses;
+  guessesText.textContent = "guesses: " + guesses;
+};
+
+</script>
+
+</body>
+</html>
+
+
+<!--  Attempt 7
+    if (computerGuess === userGuess) {
     console.log("you win");
     // document.write("you win");
     wins++
@@ -78,23 +144,7 @@ else {
     (userGuess > total && computerGuess !== userGuess ) 
     console.log("you lose");
     losses++
-}
-
-  // Hide the directions
-  directionsText.textContent = "";
-
-  // Display the user and computer guesses, and wins/losses/ties.
-  userChoiceText.textContent = "You chose: " + userGuess;
-  computerChoiceText.textContent = "The computer chose: " + computerGuess;
-  winsText.textContent = "wins: " + wins;
-  lossesText.textContent = "losses: " + losses;
-  guessesText.textContent = "guesses: " + guesses + event.key;
-};
-
-</script>
-
-</body>
-</html>
+} -->
 
 
 
