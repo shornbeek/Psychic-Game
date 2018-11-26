@@ -1,4 +1,180 @@
 <!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <title>The Pyschic Game</title>
+  <link rel ="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <!-- <link rel="stylesheet" type="text/css" href="assets/css/style.css"> -->
+</head>
+
+
+  <div class="header">
+      <h1>Psychic Game.</h1>
+      <h3>Press a letter to start playing!</h3>
+  </div>
+
+  <div class="container">
+   
+    <div class="row">
+      <div class="col-md-12, info">
+        Wins:
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="populate" id="winCount">
+          0
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12, info">
+        Losses:
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="populate" id="lossCount">
+          0
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-12, info">
+          Computers Choice:
+        </div>
+      </div>
+
+
+
+    <div class="row">
+        <div class="col-md-12">
+          <div class="populate" id="computerchoice-text">
+            0
+          </div>
+        </div>
+      </div>
+      
+
+    <div class="row">
+      <div class="col-md-12, info">
+        Guesses Remaining:
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="populate" id="guessesRemaining">
+          10
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12, info">
+        Your Guesses:
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="populate" id="guessedLetters">
+          guesses..
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+<!-- <script src="assets/javascript/game.js"></script> -->
+
+</body>
+
+</html>
+
+<script>
+    //define variables for game play
+var winCount = 1;
+var lossCount = 0;
+var guessesRemaining = 10;
+var guessedLetters = [];
+
+
+// set up array for computer to choose from
+var alphabet =
+    ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q"
+    ,"r","s","t","u","v","w","x","y","z"];
+
+// set up the computer to pick a random indexed value from aray
+
+
+
+// add a listener for the user to press a key
+document.onkeyup = function(event) {
+  var userChoice = event.key;
+
+var randomIndex = Math.floor(Math.random() * alphabet.length);
+var computerChoice = alphabet[randomIndex];
+  // make sure the user selects a value a-z
+  var regexp = /[a-z]/gi;
+    if (!regexp.test(userChoice)) {
+      alert("please enter a letter");
+    }
+    else {
+      console.log(userChoice);
+      console.log(computerChoice);
+      document.getElementById("computerchoice-text").innerHTML = computerChoice;
+    }
+    // reset computer choice if the user loses
+    if (guessesRemaining <= 0) {
+      lossCount++;
+      document.getElementById("lossCount").innerHTML = lossCount++;
+      console.log("You lost!");
+      alert("You lost!");
+      guessesRemaining = 10;
+      guessedLetters = [];
+      document.getElementById("guessedLetters").innerHTML = guessedLetters;
+      document.getElementById("guessesRemaining").innerHTML = 10;
+      randomIndex = Math.floor(Math.random() * alphabet.length);
+      computerChoice = alphabet[randomIndex];
+      console.log(computerChoice);
+      document.getElementById("computerchoice-text").innerHTML = computerChoice;
+    }
+    // compares the randomly selected computer choice and user choice
+    if (computerChoice === userChoice) {
+      console.log("You won!");
+      alert("You won!");
+      document.getElementById("winCount").innerHTML = winCount++;
+      guessedLetters = [];
+      document.getElementById("guessedLetters").innerHTML = guessedLetters;
+      randomIndex = Math.floor(Math.random() * alphabet.length);
+      computerChoiceText = document.getElementById("computerchoice-text");
+      computerChoice = alphabet[randomIndex];
+      console.log(computerChoice);
+      guessesRemaining = 10;
+      document.getElementById("guessesRemaining").innerHTML = 10;
+    } else {
+      console.log("Guess again!");
+      document.getElementById("guessesRemaining").innerHTML = guessesRemaining--;
+      guessedLetters.push(userChoice);
+      document.getElementById("guessedLetters").innerHTML = guessedLetters;
+    }
+
+
+}
+
+</script>
+
+
+
+
+
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -19,7 +195,7 @@
         <p id="wins-text"></p>
         <p id="losses-text"></p>
         <p id="guesses-text"></p>
-      </div>
+      </div> -->
 
      
       <!-- <html>
@@ -60,7 +236,7 @@
             </html> -->
 
 
-<script type=text/javascript>
+<!-- <script type=text/javascript>
 
     //array of all the letter choices 
 
@@ -69,7 +245,7 @@ var que = []
     // win loss guess varables 
 var wins = 0;
 var losses = 0;
-var guesses = 0;
+var guesses = 9;
     // elements in the html document 
  var directionsText = document.getElementById("directions-text");
  var userChoiceText = document.getElementById("userchoice-text");
@@ -95,14 +271,14 @@ if (userGuess === computerGuess)  {
     console.log("you win");    
     wins++;               
 } 
-else if (guesses >= 8) { 
+else if (guesses === 0) { 
     console.log("you lose");                                
     losses++;   
          
 }
 
 else {
-    guesses++
+    guesses--;
     console.log("not yet keep trying");
 }
 
@@ -120,7 +296,7 @@ else {
 </script>
 
 </body>
-</html>
+</html> -->
 
 
 <!--  Attempt 7
