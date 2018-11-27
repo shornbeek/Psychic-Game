@@ -15,7 +15,6 @@
 
   <div class="container">
    
-   
         <div>  Wins: </div>
         <div id="winCount"> 0</div>
       
@@ -33,7 +32,7 @@
     
   </div>
 
-<!-- <script src="assets/javascript/game.js"></script> -->
+<script src="assets/javascript/game.js"></script>
 
 </body>
 
@@ -41,20 +40,16 @@
 
 <script>
     //define variables for game play
-var winCount = 1;
+var winCount = 0;
 var lossCount = 0;
 var guessesRemaining = 10;
 var guessedLetters = [];
 
 
-// set up array for computer to choose from
+// set up array 
 var alphabet =
     ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q"
     ,"r","s","t","u","v","w","x","y","z"];
-
-// set up the computer to pick a random indexed value from aray
-
-
 
 // add a listener for the user to press a key
 document.onkeyup = function(event) {
@@ -63,48 +58,49 @@ document.onkeyup = function(event) {
 var randomIndex = Math.floor(Math.random() * alphabet.length);
 var computerChoice = alphabet[randomIndex];
   // make sure the user selects a value a-z
-  var regexp = /[a-z]/gi;
-    if (!regexp.test(userChoice)) {
-      alert("please enter a letter");
-    }
-    else {
-      console.log(userChoice);
-      console.log(computerChoice);
-      document.getElementById("computerchoice-text").innerHTML = computerChoice;
-    }
+  
     // reset computer choice if the user loses
-    if (guessesRemaining <= 0) {
+    if (guessesRemaining <= -1) {
       lossCount++;
-      document.getElementById("lossCount").innerHTML = lossCount++;
-      console.log("You lost!");
-      alert("You lost!");
       guessesRemaining = 10;
       guessedLetters = [];
-      document.getElementById("guessedLetters").innerHTML = guessedLetters;
-      document.getElementById("guessesRemaining").innerHTML = 10;
+  
       randomIndex = Math.floor(Math.random() * alphabet.length);
       computerChoice = alphabet[randomIndex];
-      console.log(computerChoice);
-      document.getElementById("computerchoice-text").innerHTML = computerChoice;
+      
+      console.log("You lost!");
+      alert("You lost!");
+      
+      document.getElementById("lossCount").innerHTML = lossCount++;
+      document.getElementById("guessedLetters").innerHTML = guessedLetters;
+      document.getElementById("guessesRemaining").innerHTML = 10;
+      
     }
     // compares the randomly selected computer choice and user choice
     if (computerChoice === userChoice) {
+       
       console.log("You won!");
-      alert("You won!");
-      document.getElementById("winCount").innerHTML = winCount++;
-      guessedLetters = [];
-      document.getElementById("guessedLetters").innerHTML = guessedLetters;
-      randomIndex = Math.floor(Math.random() * alphabet.length);
-      computerChoiceText = document.getElementById("computerchoice-text");
-      computerChoice = alphabet[randomIndex];
       console.log(computerChoice);
+     
+      
+      guessedLetters = [];
       guessesRemaining = 10;
+      randomIndex = Math.floor(Math.random() * alphabet.length);
+      computerChoice = alphabet[randomIndex];
+      
+   
+      document.getElementById("winCount").innerHTML = winCount++;
+      document.getElementById("guessedLetters").innerHTML = guessedLetters;
       document.getElementById("guessesRemaining").innerHTML = 10;
+      computerChoiceText = document.getElementById("computerchoice-text");
+      alert("You won!");
     } else {
+
+      guessedLetters.push(userChoice);
       console.log("Guess again!");
       document.getElementById("guessesRemaining").innerHTML = guessesRemaining--;
-      guessedLetters.push(userChoice);
       document.getElementById("guessedLetters").innerHTML = guessedLetters;
+      document.getElementById("computerchoice-text").innerHTML = computerChoice;
     }
 
 
@@ -114,262 +110,391 @@ var computerChoice = alphabet[randomIndex];
 
 
 
+<!-- 
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
 
+    <title>Number guessing game</title>
 
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
+    <style>
+      html {
+        font-family: sans-serif;
+      }
+      body {
+        width: 50%;
+        max-width: 800px;
+        min-width: 480px;
+        margin: 0 auto;
+      }
+      .lastResult {
+        color: white;
+        padding: 3px;
+      }
+    </style>
+  </head>
 
-    <h1>Psychic-Game</h1>
-    
-    <div>
-        <p id="directions-text">Guess a letter to start playing!</p>
-        
-        <p id="userchoice-text"></p>
-        <p id="computerchoice-text"></p>
+  <body>
+    <h1>Number guessing game</h1>
 
-        <p id="wins-text"></p>
-        <p id="losses-text"></p>
-        <p id="guesses-text"></p>
-      </div> -->
+    <p>We have selected a random number between 1 and 100. See if you can guess it in 10 turns or fewer. We'll tell you if your guess was too high or too low.</p>
 
-     
-      <!-- <html>
-            <head>
-            <title> JS guessing game </title>
-            
-            
-            <script type="text/javascript">
-                var ranNum;
-            
-                function playGame() {
-            
-                    var answer;
-                    var found = false;
-                    var count = 10;
-            
-                    while ((count > 0) && (found == false)) {
-                        answer = prompt("Guess a number between 1 and 50!");
-                        if (answer > ranNum) { alert("Guess lower!"); }
-                        if (answer < ranNum) { alert("Guess higher!!"); }
-                        if (answer == ranNum) { alert("Correct!"); found = true; }
-                        count--;
-                    }
-                    if (!found) { alert('Too bad, you lose ... The number was ' + ranNum); }
-                    return found;
-                }
-                function generateRandomNumber() {
-                    ranNum = Math.floor(Math.random() * 50) + 1;
-                }
-                window.onload = function () { generateRandomNumber(); }
-            </script>
-            </head>
-            <body>
-            <strong> Guess a random number </strong>
-                 <input type="button" value="Play game" onclick="playGame()">
-                 <input type="button" value="New game" onclick="generateRandomNumber()">
-            </body>
-            </html> -->
+    <div class="form">
+      <label for="guessField">Enter a guess: </label><input type="text" id="guessField" class="guessField">
+      <input type="submit" value="Submit guess" class="guessSubmit">
+    </div>
 
+    <div class="resultParas">
+      <p class="guesses"></p>
+      <p class="lastResult"></p>
+      <p class="lowOrHi"></p>
+    </div>
 
-<!-- <script type=text/javascript>
-
-    //array of all the letter choices 
-
-var computerChoices = ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "a", "s", "d", "f", "g", "h", "j", "k", "l", "z", "x", "c", "v", "b", "n", "m"];
-var que = []
-    // win loss guess varables 
-var wins = 0;
-var losses = 0;
-var guesses = 9;
-    // elements in the html document 
- var directionsText = document.getElementById("directions-text");
- var userChoiceText = document.getElementById("userchoice-text");
- var computerChoiceText = document.getElementById("computerchoice-text");
- var winsText = document.getElementById("wins-text");
- var lossesText = document.getElementById("losses-text");
- var guessesText = document.getElementById("guesses-text");
-
- 
-// This function is run whenever the user presses a key.
-    document.onkeyup = function(event) {
-
-// Determines which key was pressed.
-var userGuess = event.key;
-console.log(userGuess);
-
-// Randomly chooses a choice from the options array. This is the Computer's guess.
-var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
-console.log(computerChoices);
-
-// This logic determines the outcome of the game
-if (userGuess === computerGuess)  { 
-    console.log("you win");    
-    wins++;               
-} 
-else if (guesses === 0) { 
-    console.log("you lose");                                
-    losses++;   
-         
-}
-
-else {
-    guesses--;
-    console.log("not yet keep trying");
-}
-
-  // Hide the directions
-  directionsText.textContent = "";
-
-  // Display the user and computer guesses, and wins/losses/ties.
-  userChoiceText.textContent = "You chose: " + userGuess;
-  computerChoiceText.textContent = "The computer chose: " + computerGuess;
-  winsText.textContent = "wins: " + wins;
-  lossesText.textContent = "losses: " + losses;
-  guessesText.textContent = "guesses: " + guesses;
-};
-
-</script>
-
-</body>
+    <script>
+      let randomNumber = Math.floor(Math.random() * 100) + 1;
+      const guesses = document.querySelector('.guesses');
+      const lastResult = document.querySelector('.lastResult');
+      const lowOrHi = document.querySelector('.lowOrHi');
+      const guessSubmit = document.querySelector('.guessSubmit');
+      const guessField = document.querySelector('.guessField');
+      let guessCount = 1;
+      let resetButton;
+      function checkGuess() {
+        let userGuess = Number(guessField.value);
+        if (guessCount === 1) {
+          guesses.textContent = 'Previous guesses: ';
+        }
+        guesses.textContent += userGuess + ' ';
+        if (userGuess === randomNumber) {
+          lastResult.textContent = 'Congratulations! You got it right!';
+          lastResult.style.backgroundColor = 'green';
+          lowOrHi.textContent = '';
+          setGameOver();
+        } else if (guessCount === 10) {
+          lastResult.textContent = '!!!GAME OVER!!!';
+          lowOrHi.textContent = '';
+          setGameOver();
+        } else {
+          lastResult.textContent = 'Wrong!';
+          lastResult.style.backgroundColor = 'red';
+          if(userGuess < randomNumber) {
+            lowOrHi.textContent = 'Last guess was too low!' ;
+          } else if(userGuess > randomNumber) {
+            lowOrHi.textContent = 'Last guess was too high!';
+          }
+        }
+        guessCount++;
+        guessField.value = '';
+        guessField.focus();
+      }
+      guessSubmit.addEventListener('click', checkGuess);
+      function setGameOver() {
+        guessField.disabled = true;
+        guessSubmit.disabled = true;
+        resetButton = document.createElement('button');
+        resetButton.textContent = 'Start new game';
+        document.body.appendChild(resetButton);
+        resetButton.addEventListener('click', resetGame);
+      }
+      function resetGame() {
+        guessCount = 1;
+        const resetParas = document.querySelectorAll('.resultParas p');
+        for(let i = 0 ; i < resetParas.length ; i++) {
+          resetParas[i].textContent = '';
+        }
+        resetButton.parentNode.removeChild(resetButton);
+        guessField.disabled = false;
+        guessSubmit.disabled = false;
+        guessField.value = '';
+        guessField.focus();
+        lastResult.style.backgroundColor = 'white';
+        randomNumber = Math.floor(Math.random() * 100) + 1;
+      }
+    </script>
+  </body>
 </html> -->
 
 
-<!--  Attempt 7
-    if (computerGuess === userGuess) {
-    console.log("you win");
-    // document.write("you win");
-    wins++
-    }
-
-     if (computerGuess !== userGuess) {
-        console.log("guess counter");
-        guesses++
-}
-
-    if (userGuess !== total) {
-        console.log("guess counter");
-        losses++
-}
-
-else {
-    (userGuess > total && computerGuess !== userGuess ) 
-    console.log("you lose");
-    losses++
-} -->
-
-
-
-<!-- Attemt 7 
-    if (computerGuess === userGuess) {
-    console.log("you win");
-    document.write("you win");
-    wins++
-    }
-
-     else if (computerGuess !== userGuess ||  (userGuess > total)) {
-        console.log("guess counter");
-        guesses++
-}
-
-else if (userGuess > total) {
-    
-    console.log("you lose");
-    losses++
-} -->
-
-
-
-<!-- Attempt 6 
-    
-    if ((userGuess !== computerGuess)) {
-    console.log("you are wrong " + userGuess);
-
-if (userGuess < 8) {
-  losses++;
-  console.log("you have guessed " + losses + " times");
-} 
-
-if ((userGuess !== computerGuess)) {
-  guesses++;
-  console.log("you have guessed " + guesses + " times");
-} 
-
-// if ((userGuess < 8)) {
-//   guesses++;
-//   console.log("you have guessed " + guesses + " times");
-// } 
-
-else if ((userGuess === computerGuess)) {
-  win++;
-  console.log("you have guessed " + win );
-} else {
-  win++;
-}  -->
-
-
-<!-- Attempt 4
-    if ((userGuess === computerGuess)) {
-
-    if ((userGuess === "q" && computerGuess === "q") || (userGuess === "w" && computerGuess === "w") || (userGuess === "e" && computerGuess === "e"),(userGuess === "r" && computerGuess === "r") || (userGuess === "t" && computerGuess === "t") || (userGuess === "y" && computerGuess === "y"),(userGuess === "u" && computerGuess === "u") || (userGuess === "i" && computerGuess === "i") || (userGuess === "o" && computerGuess === "o"),(userGuess === "p" && computerGuess === "p") || (userGuess === "a" && computerGuess === "a") || (userGuess === "s" && computerGuess === "s"),
-   (userGuess === "d" && computerGuess === "d") || (userGuess === "f" && computerGuess === "f") || (userGuess === "g" && computerGuess === "g"),(userGuess === "h" && computerGuess === "h") || (userGuess === "j" && computerGuess === "j") || (userGuess === "k" && computerGuess === "k"),(userGuess === "l" && computerGuess === "l") || (userGuess === "z" && computerGuess === "z") || (userGuess === "x" && computerGuess === "x"),
-   (userGuess === "c" && computerGuess === "c") || (userGuess === "v" && computerGuess === "v") || (userGuess === "b" && computerGuess === "b"),(userGuess === "n" && computerGuess === "n") || (userGuess === "m" && computerGuess === "m")) {
-             wins++;
-   }  else if (userGuess !== computerGuess) {
-     guesses++;
-   } else {
-     losses++;
-   } -->
-
-
-
-<!-- Attempt 3
-    if ((userGuess === "q") || (userGuess === "w") || (userGuess === "e"),(userGuess === "r") || (userGuess === "t") || (userGuess === "y"),(userGuess === "u") || (userGuess === "i") || (userGuess === "o"),(userGuess === "p") || (userGuess === "a") || (userGuess === "s"),
-(userGuess === "d") || (userGuess === "f") || (userGuess === "g"),(userGuess === "h") || (userGuess === "j") || (userGuess === "k"),(userGuess === "l") || (userGuess === "z") || (userGuess === "x"),
-(userGuess === "c") || (userGuess === "v") || (userGuess === "b"),(userGuess === "n") || (userGuess === "m")) {
-
- if ((userGuess === "q" && computerGuess === "q") || (userGuess === "w" && computerGuess === "w") || (userGuess === "e" && computerGuess === "e"),(userGuess === "r" && computerGuess === "r") || (userGuess === "t" && computerGuess === "t") || (userGuess === "y" && computerGuess === "y"),(userGuess === "u" && computerGuess === "u") || (userGuess === "i" && computerGuess === "i") || (userGuess === "o" && computerGuess === "o"),(userGuess === "p" && computerGuess === "p") || (userGuess === "a" && computerGuess === "a") || (userGuess === "s" && computerGuess === "s"),
-(userGuess === "d" && computerGuess === "d") || (userGuess === "f" && computerGuess === "f") || (userGuess === "g" && computerGuess === "g"),(userGuess === "h" && computerGuess === "h") || (userGuess === "j" && computerGuess === "j") || (userGuess === "k" && computerGuess === "k"),(userGuess === "l" && computerGuess === "l") || (userGuess === "z" && computerGuess === "z") || (userGuess === "x" && computerGuess === "x"),
-(userGuess === "c" && computerGuess === "c") || (userGuess === "v" && computerGuess === "v") || (userGuess === "b" && computerGuess === "b"),(userGuess === "n" && computerGuess === "n") || (userGuess === "m" && computerGuess === "m")) {
-          wins++;
-}  else if (userGuess !== computerGuess) {
-  guesses++;
-} else {
-  losses++;
-} -->
 
 
 
 
-
-<!--  Attempt 2 logic 
-    if ((userGuess !== computerGuess)) {
-
-    if ((userGuess !== computerGuess)) {
-      guesses++;
-    } else if (guesses <  8) {
-      losses++;
-    } else {
-      win++;
-    } -->
+<!-- <style>
+.hidden {
+    display: none;
+  }
 
 
+</style>
+
+<div id="main">
+    <h1>Hangman</h1>
+    <div id="start">
+      <button id="btnStart">Start</button>
+    </div>
+    <div id="gameBoard" class="hidden">
+      <h1>Guess the Word</h1>
+      <div id="wordBoard"></div>
+      Guessed Letters:
+      <div id="guessedLetters"></div>
+      <div id="gameStatus"></div>
+    </div>
+    <div id="playAgain" class="hidden">
+      <button id="btnPlayAgain">Play Again?</button>
+    </div>
+  </div>
 
 
-<!--   Attempt 1 Logic 
-if ((userGuess === computerGuess)) {
+  <script>
+  $(() => {
+  const appData = {
+    words: ['Chopper', 'Dot', 'Carl'],
+    guessLimit: 8,
+  };
 
-    if ((userGuess === computerGuess)) {
-      wins++;
-    } else if (userGuess !== computerGuess) {
-      guesses++;
-    } else {
-      losses++;
-    } -->
+  let appState = {};
   
+  const initAppState = () => {
+    const randomWordIndex = Math.floor(Math.random() * appData.words.length);
+    const word = appData.words[randomWordIndex];
+    const wordBoard = Array(word.length).fill('_');
+    appState = {
+      currentWord: randomWordIndex,
+      guessedLetters: [],
+      remainingGuesses: appData.guessLimit,
+      wordBoard: wordBoard,
+    };
+  };
+  
+  const isLoser = () => {
+    return appState.remainingGuesses === 0;
+  }
+  
+  const isWinner = () => {
+    return !appState.wordBoard.includes('_');
+  }
+  
+  const renderWordBoard = () => {
+    $('#wordBoard').text(appState.wordBoard.join(' '));
+  }
+  
+  const renderGuessedLetters = () => {
+    const upperCaseWord = appData.words[appState.currentWord].toUpperCase();
+    let incorrectlyGuessedLetters = appState.guessedLetters.filter(letter => !upperCaseWord.includes(letter));
+    $('#guessedLetters').text(incorrectlyGuessedLetters.join(', '));
+  }
+  
+  const renderStatus = () => {
+    if(isLoser()){
+      $('#gameStatus').text('You loose!!!');
+      $('#playAgain').show();
+    } else if(isWinner()){
+      $('#gameStatus').text('You Win!!!');
+      $('#playAgain').show();
+    } else {
+      $('#gameStatus').text(`Remaining Guesses: ${appState.remainingGuesses}`);
+    }
+  }
+
+  const guess = (letter) => {
+    const word = appData.words[appState.currentWord];
+    appState.guessedLetters.push(letter);
+    
+    let correctGuess = false;
+    for(let i = 0; i < word.length; i++){
+      const wordLetter = word.charAt(i);
+      if(wordLetter.toUpperCase() === letter){
+        appState.wordBoard[i] = wordLetter;
+        correctGuess = true;
+      }
+    }
+    
+    if(!correctGuess){
+      appState.remainingGuesses--;
+    }
+    
+    renderStatus();
+    renderWordBoard();
+    renderGuessedLetters();
+  }
+  
+  const isLetterKeyCode = (keyCode) => {
+    return (keyCode >= 65 && keyCode <= 90)
+  };
+
+  const handleKeyDown = (event) => {
+    const keyCode = event.keyCode;
+    const key = String.fromCharCode(keyCode);
+
+    if (appState.guessedLetters.includes(key) || !isLetterKeyCode(keyCode) || isLoser() || isWinner()) {
+      return;
+    }
+    guess(key);
+  };
+  
+  const startGame = () => {
+    initAppState();
+    renderStatus();
+    renderWordBoard();
+  };
+  
+  const handleStart = () => {
+    $('#start').hide();
+    $('#gameBoard').show();
+    startGame();
+  };
+  
+  const handlePlayAgain = () => {
+    $('#playAgain').hide();
+    startGame();
+  };
+
+  const initApp = () => {
+    document.onkeydown = handleKeyDown;
+    $('#btnStart').on('click', handleStart);
+    $('#btnPlayAgain').on('click', handlePlayAgain)
+  };
+  
+  initApp();
+});
+
+  
+  </script> -->
+
+
+
+<!-- <html>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="css/css.css">
+</head>
+<body>
+  <div id="info">
+    <h1>Hangman</h1>
+    <p id="instuctions">Can you guess the word in 10 tries?</p>
+    <p id="display"></p>
+    <p id="displayTries"></p>
+    <p id="displayProgress"></p>
+  </div>
+  <div id="btnSub">
+    <input type="text" maxlength="1" id="userInput" disabled/>
+    <input type="button" value="Start Game" id="button" onclick="startGame()">
+  </div>
+  <div id="results">
+    <p id= "error"></p>
+    <p id="mGuessesHeader"></p>
+    <p id="mGuesses"></p>
+  </div>
+  <script src="js/game2.js"></script>
+</body>
+</html>
+
+
+<script>
+
+    /*
+TODO: Create array of answers, one of which is randomly selected each game.
+TODO: Create reg ex to not allow numbers, spaces or punctuation to be guessed.
+TODO: Style game with CSS.
+*/
+let answer = "programming";
+let tries = 10;
+let correctGuesses = [];
+let missedGuesses = [];
+let progress = "";
+let userGuess;
+let attempts = -1;
+let mGuesses = document.getElementById("mGuesses");
+let gameStatus = document.getElementById("instuctions");
+let inputForm = document.getElementById("userInput");
+let answerStatus = document.getElementById("error");
+// Show and update progress
+function showProgress(){
+while(progress.length != answer.length){
+  progress += "-";
+}
+let splitAnswer = progress.split("");
+for(var i = 0; i < answer.length; i++){
+  if(answer.charAt(i) === userGuess){
+    splitAnswer[i] = userGuess;
+  }
+}
+progress = splitAnswer.join("");
+return progress;
+}
+// Check player guess, display guess results to player
+function checkGuess(userGuess){
+  if(missedGuesses.includes(userGuess) || correctGuesses.includes(userGuess)){
+    answerStatus.innerHTML = ("<span>You have already guessed the letter: </span>" +
+                              userGuess.toUpperCase()  +
+                              "<p>Please try again!</p>");
+  }
+  if(!(answer.includes(userGuess)) && !(missedGuesses.includes(userGuess))){
+    missedGuesses.push(userGuess);
+    mGuesses.innerHTML = missedGuesses.toString().toUpperCase();
+    answerStatus.innerHTML = ("Wrong answer");
+    tries--;
+  } else if(answer.includes(userGuess) && !(correctGuesses.includes(userGuess))){
+    correctGuesses.push(userGuess);
+//     Ensure clicking 'start game' doesn't print 'correct' to page
+    if(attempts !== -1){
+      answerStatus.innerHTML = ("Correct!");
+    }
+    attempts++;
+  }
+}
+// Start game, check for win or loss
+function startGame(){
+answerStatus.innerHTML = " ";
+mGuessesHeader.innerHTML = ("Missed guesses:")
+if(document.getElementById("button").value !== "Submit"){
+  reset = document.getElementById("button");
+  reset.value = "Submit";
+}
+if (inputForm.disabled === true){
+    inputForm.disabled = false;
+}
+guess = document.getElementById("userInput").value.toLowerCase();
+userGuess = guess;
+userInput.value = "";
+checkGuess(userGuess);
+showProgress();
+displayProgress.innerHTML = progress;
+if(!progress.includes("-")){
+  gameStatus.innerHTML = ("You won in " + attempts + " attempts with " + tries + " tries remaining!");
+  let hide = document.getElementById("mGuessesHeader");
+  hide.innerHTML = ("");
+  answerStatus.innerHTML = ("");
+  resetGame();
+} else if (tries === 0){
+  resetGame();
+  gameStatus.innerHTML = ("Sorry, you lost!");
+  answerStatus.innerHTML = ("");
+  mGuessesHeader.innerHTML = ("");
+} else {
+  let display = document.getElementById("instuctions");
+  display.innerHTML = "You have " + tries + " tries remaining";
+  }
+}
+// Reset varibles for next game
+function resetGame(){
+tries = 10;
+attempts = -1;
+progress = "";
+correctGuesses = [];
+missedGuesses = [];
+restart = document.getElementById("button");
+restart.value = "Replay?";
+mGuesses.innerHTML = ("");
+disableForm();
+}
+// Disable form at end of game
+function disableForm(){
+if (inputForm.disabled === false){
+  inputForm.disabled = true;
+}
+}
+
+</script>
+ -->
