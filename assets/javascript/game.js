@@ -18,10 +18,9 @@ document.onkeyup = function(event) {
 
 var randomIndex = Math.floor(Math.random() * alphabet.length);
 var computerChoice = alphabet[randomIndex];
-  // make sure the user selects a value a-z
   
     // reset computer choice if the user loses
-    if (guessesRemaining <= -1) {
+    if (guessesRemaining <= 0) {
       lossCount++;
       guessesRemaining = 10;
       guessedLetters = [];
@@ -29,8 +28,8 @@ var computerChoice = alphabet[randomIndex];
       randomIndex = Math.floor(Math.random() * alphabet.length);
       computerChoice = alphabet[randomIndex];
       
-      console.log("You lost!");
-      alert("You lost!");
+      console.log("You lost! " + "The computer picked " + computerChoice + " You picked " + userChoice);
+      alert("You lost! " + "The computer picked " + computerChoice + " You picked " + userChoice);
       
       document.getElementById("lossCount").innerHTML = lossCount++;
       document.getElementById("guessedLetters").innerHTML = guessedLetters;
@@ -38,10 +37,10 @@ var computerChoice = alphabet[randomIndex];
       
     }
     // compares the randomly selected computer choice and user choice
-    if (computerChoice === userChoice) {
+    else if (computerChoice === userChoice) {
        
-      console.log("You won!");
-      console.log(computerChoice);
+      console.log("You Won! " + "The computer picked " + computerChoice + " You picked " + userChoice);
+      alert("You Won! " + "The computer picked " + computerChoice + " You picked " + userChoice);
      
       
       guessedLetters = [];
@@ -54,11 +53,11 @@ var computerChoice = alphabet[randomIndex];
       document.getElementById("guessedLetters").innerHTML = guessedLetters;
       document.getElementById("guessesRemaining").innerHTML = 10;
       computerChoiceText = document.getElementById("computerchoice-text");
-      alert("You won!");
+      
     } else {
 
       guessedLetters.push(userChoice);
-      console.log("Guess again!");
+      console.log("Guess Again! " + "The computer picked " + computerChoice + " You picked " + userChoice);
       document.getElementById("guessesRemaining").innerHTML = guessesRemaining--;
       document.getElementById("guessedLetters").innerHTML = guessedLetters;
       document.getElementById("computerchoice-text").innerHTML = computerChoice;
